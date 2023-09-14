@@ -1,0 +1,11 @@
+CREATE TABLE usuarios(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    nombre VARCHAR(100),
+    apellido VARCHAR(100),
+    email VARCHAR(100),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    password VARCHAR(255),
+    rol VARCHAR(100) NOT NULL,
+    status BOOLEAN DEFAULT TRUE,
+    PRIMARY KEY(id)
+);
