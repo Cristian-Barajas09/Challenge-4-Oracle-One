@@ -5,6 +5,8 @@ import com.foroAlura.domain.usuario.Usuario;
 import com.foroAlura.domain.usuario.UsuarioRepository;
 import com.foroAlura.infra.errors.Exceptions.TituloAlReadyExistsError;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,9 @@ import java.net.URI;
 @RestController
 @RequestMapping("/cursos")
 @SecurityRequirement(name = "bearer-key")
+@Tags({
+        @Tag(name = "Cursos")
+})
 public class CursoController {
 
     @Autowired

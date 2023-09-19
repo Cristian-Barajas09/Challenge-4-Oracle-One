@@ -2,6 +2,7 @@ package com.foroAlura.domain.usuario;
 
 
 import com.foroAlura.domain.curso.Curso;
+import com.foroAlura.domain.respuesta.Respuesta;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -50,6 +51,9 @@ public class Usuario implements UserDetails {
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "profesor")
     private List<Curso> cursosInpartidos;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "usuario")
+    private List<Respuesta> respuestas;
 
 
     public Usuario(DatosRegistrarUsuario usuario,String password){
@@ -119,4 +123,6 @@ public class Usuario implements UserDetails {
     public void eliminar() {
         this.status = false;
     }
+
+    public void changeRol(Roles rol) {this.rol = rol;}
 }

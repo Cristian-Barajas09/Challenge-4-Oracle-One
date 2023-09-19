@@ -3,8 +3,10 @@ package com.foroAlura.controller;
 import com.foroAlura.domain.usuario.*;
 
 import com.foroAlura.infra.errors.Exceptions.EmailAlReadyExistsError;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuarios")
+@Tags({
+        @Tag(name = "usuarios")
+})
 public class UsuarioController {
 
     @Autowired
@@ -61,5 +66,17 @@ public class UsuarioController {
         Usuario usuario = usuarioRepository.getReferenceById(idUsuario);
         usuario.eliminar();
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/change-rol")
+    @Transactional
+    @SecurityRequirement(name="bearer-key")
+    public ResponseEntity cambiarRol(
+        @RequestBody DatosCambiarRol rol
+    ){
+        Usuario usuario = usuarioRepository.getReferenceById(rol.idUsuario());
+        usuario.changeRol(rol.rol());
+
+        return ResponseEntity.ok().build();
     }
 }

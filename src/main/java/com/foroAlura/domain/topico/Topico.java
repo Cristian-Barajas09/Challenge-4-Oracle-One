@@ -1,6 +1,7 @@
 package com.foroAlura.domain.topico;
 
 import com.foroAlura.domain.curso.Curso;
+import com.foroAlura.domain.respuesta.Respuesta;
 import com.foroAlura.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "topicos")
@@ -33,10 +35,13 @@ public class Topico {
     @ManyToOne(fetch = FetchType.LAZY)
     private Curso curso;
 
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "topico")
+    private List<Respuesta> respuestas;
+
     public Topico(DatosCrearTopico datos,Usuario usuario,Curso curso) {
         this.titulo = datos.titulo();
         this.mensaje = datos.mensaje();
-        if(datos.fechaCreacion() != null){
+        if(datos.fechaCreacion() != null) {
             this.fechaCreacion = datos.fechaCreacion();
         } else {
             this.fechaCreacion = LocalDateTime.now();

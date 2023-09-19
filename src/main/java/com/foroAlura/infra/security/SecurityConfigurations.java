@@ -28,9 +28,14 @@ public class SecurityConfigurations {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement((session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST,"/cursos").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/cursos").hasRole(Roles.ADMIN.name())
+                        .requestMatchers(HttpMethod.PUT,"/usuarios/change-rol").hasRole(Roles.ADMIN.name())
                         .requestMatchers(HttpMethod.POST,"/registro","/ingresar").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**"
+                        ).permitAll().anyRequest().authenticated()
                 ).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

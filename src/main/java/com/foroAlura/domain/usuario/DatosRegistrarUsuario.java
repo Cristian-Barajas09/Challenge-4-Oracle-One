@@ -20,7 +20,6 @@ public record DatosRegistrarUsuario(
          LocalDateTime fechaCreacion,
         @NotNull
         @NotBlank
-        String password,
-        Roles rol
+        String password
 ) {
 }

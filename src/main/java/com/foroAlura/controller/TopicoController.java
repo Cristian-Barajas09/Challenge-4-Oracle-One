@@ -8,6 +8,8 @@ import com.foroAlura.domain.usuario.DatosListadoUsuario;
 import com.foroAlura.domain.usuario.Usuario;
 import com.foroAlura.domain.usuario.UsuarioRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,9 @@ import java.net.URI;
 @RestController
 @RequestMapping("/topicos")
 @SecurityRequirement(name="bearer-key")
+@Tags({
+        @Tag(name = "Topicos")
+})
 public class TopicoController {
     @Autowired
     private TopicoRepository topicoRepository;
